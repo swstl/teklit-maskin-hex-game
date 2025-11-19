@@ -85,7 +85,10 @@ def draw_simple_board(board, radius, red_val, blue_val):
     hex_height = radius * 1.5
 
     root = tk.Tk()
-    canvas = tk.Canvas(root, width=800, height=600)
+    canvas = tk.Canvas(root,
+                       width=hex_width*len(board[0])+hex_width/2*len(board),
+                       height=hex_height*(len(board)+1)
+                       )
     canvas.pack()
 
     create_border(
