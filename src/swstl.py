@@ -1,5 +1,5 @@
-from GraphTsetlinMachine.tm import MultiClassGraphTsetlinMachine
 from GraphTsetlinMachine.graphs import Graphs
+from GraphTsetlinMachine.tm import MultiClassGraphTsetlinMachine
 
 import pandas as pd
 import numpy as np
@@ -11,26 +11,32 @@ import os
 
 def default_args(**kwargs):
     parser = argparse.ArgumentParser()
-    parser.add_argument("--bord_size", default=10, type=int)
-    parser.add_argument("--epochs", default=100, type=int)
-    parser.add_argument("--number-of-clauses", default=1000, type=int)
-    parser.add_argument("--T", default=2000, type=int)
+    parser.add_argument("--data_size", "-d", default=10000, type=int)
+    parser.add_argument("--board_size", "-b", default=5, type=int)
+    parser.add_argument("--epochs", default=200, type=int)
+    parser.add_argument("--number-of-clauses", default=5000, type=int)
+    parser.add_argument("--T", default=10000, type=int)
     parser.add_argument("--s", default=5.0, type=float)
     parser.add_argument("--number-of-state-bits", default=8, type=int)
     parser.add_argument("--depth", default=2, type=int)
-    parser.add_argument("--hypervector-size", default=512, type=int)
+    parser.add_argument("--hypervector-size", default=256, type=int)
     parser.add_argument("--hypervector-bits", default=4, type=int)
-    parser.add_argument("--message-size", default=512, type=int)
+    parser.add_argument("--message-size", default=256, type=int)
     parser.add_argument("--message-bits", default=4, type=int)
     parser.add_argument('--double-hashing', dest='double_hashing', default=False, action='store_true')
     parser.add_argument('--one-hot-encoding', dest='one_hot_encoding', default=False, action='store_true')
     parser.add_argument("--max-included-literals", default=32, type=int)
 
-    args = parser.parse_args([])
+    args = parser.parse_args()
     for key, value in kwargs.items():
         if key in args.__dict__:
             setattr(args, key, value)
     return args
+
+def print_args(args):
+    print("Arguments:")
+    for arg, value in vars(args).items():
+        print(f"  {arg}: {value}")
 
 def _load_hex_data(csv_path):
     """Load the Hex game CSV data"""
@@ -51,14 +57,53 @@ def _load_hex_data(csv_path):
             board[r, c] = row[col]
         boards.append(board)
  
-    labels = df['winner'].values
+    labels = np.array(df['winner'].values)
     return boards, labels
+
+
+##################################################
+################  Split the data  ################
+##################################################
+#TODO: make this generate if file not found
+def get_hex_games(split, how_many=1000, board_size=3):
+    csv_path = f'data/hex_games_{how_many}_size_{board_size}.csv'
+    try:
+        b, t = _load_hex_data(csv_path)
+
+        print(f"Loaded {len(b)} games from {csv_path}")
+
+        split = int(len(b)*split)
+        indices = np.random.permutation(len(b))
+
+        X_train = [b[i] for i in indices[:split]]
+        X_test = [b[i] for i in indices[split:]]
+        Y_train = np.array([0 if y == -1 else y for y in t[indices[:split]]], dtype=np.uint32)
+        Y_test = np.array([0 if y == -1 else y for y in t[indices[split:]]], dtype=np.uint32)
+
+        return X_train, Y_train, X_test, Y_test
+
+    except FileNotFoundError:
+        # generate the file
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        hex_executable = os.path.join(script_dir, 'dataset', 'hex')
+        subprocess.run([hex_executable, '-b', str(board_size), '-g', str(how_many)], check=True)
+
+        # move the file
+        os.makedirs('data', exist_ok=True)
+        generated_file = f'hex_games_{how_many}_size_{board_size}.csv'
+        shutil.move(generated_file, csv_path)
+
+        # rerun
+        return get_hex_games(split, how_many, board_size)
+
 
 
 ###################################################
 ################ Create the graphs ################
 ###################################################
+
 def create_graphs(X_train, X_test, args):
+    print(f"Creating graphs on dataset of length {len(X_train)}, and {len(X_test)}...")
     def get_neighbours(row, col, bord_size):
         neighbours = []
         directions = [(-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0)]
@@ -98,9 +143,8 @@ def create_graphs(X_train, X_test, args):
 
                     for nr, nc in neighbours:
                         n_name = f'cell_{nr}_{nc}'
-                        edge_type = 'adjacent'
+                        edge_type = 'neighbour'
                         graph.add_graph_node_edge(id, cell_name, n_name, edge_type)
-
 
                     # add the color of each node:
                     cell_value = board[row, col]
@@ -120,6 +164,18 @@ def create_graphs(X_train, X_test, args):
                     # then the matches can be combined #
                     # special markers (boarders)
                     match (row, col):
+                        case (0, 0):
+                            graph.add_graph_node_property(id, cell_name, 'top')
+                            graph.add_graph_node_property(id, cell_name, 'left')
+                        case (0, c) if c == bord_size - 1:
+                            graph.add_graph_node_property(id, cell_name, 'top')
+                            graph.add_graph_node_property(id, cell_name, 'right')
+                        case (r, 0) if r == bord_size - 1:
+                            graph.add_graph_node_property(id, cell_name, 'bottom')
+                            graph.add_graph_node_property(id, cell_name, 'left')
+                        case (r, c) if r == bord_size - 1 and c == bord_size - 1:
+                            graph.add_graph_node_property(id, cell_name, 'bottom')
+                            graph.add_graph_node_property(id, cell_name, 'right')
                         case (0, _):
                             graph.add_graph_node_property(id, cell_name, 'top')
                         case (_, 0):
@@ -128,17 +184,6 @@ def create_graphs(X_train, X_test, args):
                             graph.add_graph_node_property(id, cell_name, 'bottom')
                         case (_, c) if c == bord_size - 1:
                             graph.add_graph_node_property(id, cell_name, 'right')
-
-                    # (and corners)
-                    match(row, col):
-                        case (0, 0):
-                            graph.add_graph_node_property(id, cell_name, 'top_left_corner')
-                        case (0, c) if c == bord_size - 1:
-                            graph.add_graph_node_property(id, cell_name, 'top_right_corner')
-                        case (r, 0) if r == bord_size - 1:
-                            graph.add_graph_node_property(id, cell_name, 'bottom_left_corner')
-                        case (r, c) if r == bord_size - 1 and c == bord_size - 1:
-                            graph.add_graph_node_property(id, cell_name, 'bottom_right_corner')
 
         # encode:
         graph.encode()
@@ -152,7 +197,7 @@ def create_graphs(X_train, X_test, args):
         symbols.append(f'row_{i}')
         symbols.append(f'col_{i}')
     symbols.extend(['top', 'bottom', 'left', 'right'])
-    symbols.extend(['top_left_corner', 'top_right_corner', 'bottom_left_corner', 'bottom_right_corner'])
+    # symbols.extend(['top_left', 'top_right', 'bottom_left', 'bottom_right'])
 
 
 
@@ -163,8 +208,6 @@ def create_graphs(X_train, X_test, args):
         symbols=symbols,
         hypervector_bits=args.hypervector_bits,
         hypervector_size=args.hypervector_size,
-        double_hashing=args.double_hashing,
-        one_hot_encoding=args.one_hot_encoding
     )
     configure_graphs(training_graph, X_train)
 
@@ -184,46 +227,10 @@ def create_graphs(X_train, X_test, args):
 
 
 ##################################################
-################  Split the data  ################
-##################################################
-#TODO: make this generate if file not found
-def get_hex_games(split, how_many=1000, board_size=3):
-    csv_path = f'data/hex_games_{how_many}_size_{board_size}.csv'
-    try:
-        b, t = _load_hex_data(csv_path)
-
-        split = int(len(b)*split)
-        indices = np.random.permutation(len(b))
-
-        X_train = np.array([b[i] for i in indices[:split]]) 
-        X_test = np.array([b[i] for i in indices[split:]])
-        Y_train = np.array([t[i] for i in indices[:split]])
-        Y_test = np.array([t[i] for i in indices[split:]])
-
-        return X_train, Y_train, X_test, Y_test
-
-    except FileNotFoundError:
-        # generate the file
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        hex_executable = os.path.join(script_dir, 'dataset', 'hex')
-        subprocess.run([hex_executable, '-b', str(board_size), '-g', str(how_many)], check=True)
-
-        # move the file
-        os.makedirs('data', exist_ok=True)
-        generated_file = f'hex_games_{how_many}_size_{board_size}.csv'
-        shutil.move(generated_file, csv_path)
-
-        # rerun
-        return get_hex_games(split, how_many, board_size)
-
-
-
-
-
-##################################################
 ################   Train the tm   ################
 ##################################################
 def train_tm(tm, graph_train, Y_train, graph_test, Y_test, args):
+    print(f"Training for {args.epochs} epochs...")
     for epoch in range(args.epochs):
         before = time.time()
         tm.fit(graph_train, Y_train, epochs=1, incremental=True)
@@ -241,7 +248,6 @@ def train_tm(tm, graph_train, Y_train, graph_test, Y_test, args):
             f"Test Accuracy: {acc_test:.2f}% "
             f"Time: {epoch_time:.2f}s"
         )
-    return tm
 
 
 
@@ -282,11 +288,12 @@ tm = MultiClassGraphTsetlinMachine(
     message_size=args.message_size,
     message_bits=args.message_bits,
     double_hashing=args.double_hashing,
-    one_hot_encoding=args.one_hot_encoding
+    one_hot_encoding=args.one_hot_encoding,
 )
 
-x_train, y_train, x_test, y_test = get_hex_games(0.8, how_many=1000, board_size=args.bord_size)
+print_args(args)
+x_train, y_train, x_test, y_test = get_hex_games(0.8, how_many=args.data_size, board_size=args.board_size)
 train_graph, test_graph = create_graphs(x_train, x_test, args)
-tm = train_tm(tm, train_graph, y_train, test_graph, y_test, args)
+train_tm(tm, train_graph, y_train, test_graph, y_test, args)
 
 print_clauses(tm, args.hypervector_size)
