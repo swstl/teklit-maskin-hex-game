@@ -11,9 +11,9 @@ import os
 
 def default_args(**kwargs):
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data_size", "-d", default=10000, type=int)
-    parser.add_argument("--board_size", "-b", default=5, type=int)
-    parser.add_argument("--epochs", default=200, type=int)
+    parser.add_argument("--number-of-boards", "-n", default=50000, type=int)
+    parser.add_argument("--board-size", "-b", default=5, type=int)
+    parser.add_argument("--epochs", default=100, type=int)
     parser.add_argument("--number-of-clauses", default=5000, type=int)
     parser.add_argument("--T", default=10000, type=int)
     parser.add_argument("--s", default=5.0, type=float)
@@ -21,10 +21,10 @@ def default_args(**kwargs):
     parser.add_argument("--depth", default=2, type=int)
     parser.add_argument("--hypervector-size", default=256, type=int)
     parser.add_argument("--hypervector-bits", default=4, type=int)
-    parser.add_argument("--message-size", default=256, type=int)
+    parser.add_argument("--message-size", default=32, type=int)
     parser.add_argument("--message-bits", default=4, type=int)
-    parser.add_argument('--double-hashing', dest='double_hashing', default=False, action='store_true')
-    parser.add_argument('--one-hot-encoding', dest='one_hot_encoding', default=False, action='store_true')
+    parser.add_argument("--double-hashing", dest="double_hashing", default=False, action="store_true")
+    parser.add_argument("--one-hot-encoding", dest="one_hot_encoding", default=False, action="store_true")
     parser.add_argument("--max-included-literals", default=32, type=int)
 
     args = parser.parse_args()
@@ -101,9 +101,8 @@ def get_hex_games(split, how_many=1000, board_size=3):
 ###################################################
 ################ Create the graphs ################
 ###################################################
-
 def create_graphs(X_train, X_test, args):
-    print(f"Creating graphs on dataset of length {len(X_train)}, and {len(X_test)}...")
+    print(f"Creating graphs on dataset of length training: {len(X_train)}, and test: {len(X_test)}...")
     def get_neighbours(row, col, bord_size):
         neighbours = []
         directions = [(-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0)]
@@ -200,6 +199,7 @@ def create_graphs(X_train, X_test, args):
     # symbols.extend(['top_left', 'top_right', 'bottom_left', 'bottom_right'])
 
 
+    # args.hypervector_size = len(symbols)
 
     # create the training graphs
     num_training_graphs = len(X_train)
@@ -246,7 +246,7 @@ def train_tm(tm, graph_train, Y_train, graph_test, Y_test, args):
             f"Epoch {epoch+1}/{args.epochs} "
             f"Train Accuracy: {acc_train:.2f}% "
             f"Test Accuracy: {acc_test:.2f}% "
-            f"Time: {epoch_time:.2f}s"
+            f"Time: {epoch_time:.2f}s", flush=True
         )
 
 
@@ -282,18 +282,19 @@ tm = MultiClassGraphTsetlinMachine(
     args.number_of_clauses,
     args.T,
     args.s,
-    max_included_literals=args.max_included_literals,
     number_of_state_bits=args.number_of_state_bits,
     depth=args.depth,
     message_size=args.message_size,
     message_bits=args.message_bits,
+    max_included_literals=args.max_included_literals,
     double_hashing=args.double_hashing,
     one_hot_encoding=args.one_hot_encoding,
+    grid=(16*13, 1, 1),
+    block=(128, 1, 1)
 )
 
 print_args(args)
-x_train, y_train, x_test, y_test = get_hex_games(0.8, how_many=args.data_size, board_size=args.board_size)
+x_train, y_train, x_test, y_test = get_hex_games(0.8, how_many=args.number_of_boards, board_size=args.board_size)
 train_graph, test_graph = create_graphs(x_train, x_test, args)
 train_tm(tm, train_graph, y_train, test_graph, y_test, args)
-
-print_clauses(tm, args.hypervector_size)
+# print_clauses(tm, args.hypervector_size)
