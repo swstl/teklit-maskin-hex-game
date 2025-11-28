@@ -1,0 +1,67 @@
+##########################
+# Hex 1x1 Experiment Log #
+##########################
+
+Initialization of sparse structure.
+Arguments:
+  number_of_boards: 50000
+  board_size: 1
+  epochs: 1
+  number_of_clauses: 2
+  T: 5000
+  s: 1.0
+  number_of_state_bits: 8
+  depth: 2
+  hypervector_size: 256
+  hypervector_bits: 4
+  message_size: 32
+  message_bits: 4
+  double_hashing: False
+  one_hot_encoding: False
+  max_included_literals: 3
+Loaded 50000 games from data/hex_games_50000_size_1.csv
+Creating graphs on dataset of length training: 40000, and test: 10000...
+Training for 1 epochs...
+Epoch 1/1 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 9.29s
+
+
+
+
+##########################
+# Hex 2x2 Experiment Log #
+##########################
+Initialization of sparse structure.
+Arguments:
+  number_of_boards: 50000
+  board_size: 2
+  epochs: 100
+  number_of_clauses: 4
+  T: 6000
+  s: 1.0
+  number_of_state_bits: 8
+  depth: 2
+  hypervector_size: 256
+  hypervector_bits: 4
+  message_size: 32
+  message_bits: 4
+  double_hashing: False
+  one_hot_encoding: False
+  max_included_literals: 10000
+Generating 50000 games on 2x2 board...
+Done! Generated 50000 games. Output: hex_games_50000_size_2.csv
+Loaded 50000 games from data/hex_games_50000_size_2.csv
+Creating graphs on dataset of length training: 40000, and test: 10000...
+Training for 100 epochs...
+Epoch 1/100 Train Accuracy: 74.51% Test Accuracy: 75.30% Time: 14.01s
+Epoch 2/100 Train Accuracy: 91.54% Test Accuracy: 91.80% Time: 8.06s
+Epoch 3/100 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 7.89s
+Epoch 4/100 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 7.18s
+
+
+
+
+
+
+
+3x3 board:
+(n*2 + (n*2-1)*n-2)*2 = clauses 

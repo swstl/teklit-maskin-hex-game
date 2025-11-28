@@ -1,0 +1,123 @@
+
+
+coder@coder-sanderw-alt-mulig-machine-85cb4bfc95-znnsp:~/teklit-maskin$ uv run src/swstl.py 
+Initialization of sparse structure.
+Arguments:
+  number_of_boards: 50000
+  board_size: 5
+  epochs: 100
+  number_of_clauses: 5000
+  T: 5000
+  s: 1.0
+  number_of_state_bits: 8
+  depth: 2
+  hypervector_size: 256
+  hypervector_bits: 4
+  message_size: 32
+  message_bits: 4
+  double_hashing: False
+  one_hot_encoding: False
+  max_included_literals: 100
+Loaded 50000 games from data/hex_games_50000_size_5.csv
+Creating graphs on dataset of length training: 40000, and test: 10000...
+Training for 100 epochs...
+Epoch 1/100 Train Accuracy: 84.32% Test Accuracy: 83.89% Time: 15.04s
+Epoch 2/100 Train Accuracy: 90.14% Test Accuracy: 89.84% Time: 12.30s
+Epoch 3/100 Train Accuracy: 93.46% Test Accuracy: 93.33% Time: 12.19s
+Epoch 4/100 Train Accuracy: 94.79% Test Accuracy: 94.59% Time: 11.88s
+Epoch 5/100 Train Accuracy: 94.49% Test Accuracy: 94.01% Time: 11.90s
+Epoch 6/100 Train Accuracy: 94.84% Test Accuracy: 94.55% Time: 11.85s
+Epoch 7/100 Train Accuracy: 97.17% Test Accuracy: 96.83% Time: 11.82s
+Epoch 8/100 Train Accuracy: 97.54% Test Accuracy: 97.39% Time: 11.67s
+Epoch 9/100 Train Accuracy: 97.92% Test Accuracy: 97.73% Time: 11.64s
+Epoch 10/100 Train Accuracy: 97.82% Test Accuracy: 97.69% Time: 11.60s
+Epoch 11/100 Train Accuracy: 97.63% Test Accuracy: 97.50% Time: 11.54s
+Epoch 12/100 Train Accuracy: 98.19% Test Accuracy: 97.98% Time: 11.49s
+Epoch 13/100 Train Accuracy: 98.13% Test Accuracy: 98.18% Time: 11.45s
+Epoch 14/100 Train Accuracy: 98.30% Test Accuracy: 98.38% Time: 11.44s
+Epoch 15/100 Train Accuracy: 98.07% Test Accuracy: 97.88% Time: 11.42s
+Epoch 16/100 Train Accuracy: 98.61% Test Accuracy: 98.55% Time: 11.59s
+Epoch 17/100 Train Accuracy: 98.62% Test Accuracy: 98.45% Time: 11.38s
+Epoch 18/100 Train Accuracy: 98.89% Test Accuracy: 98.81% Time: 11.35s
+Epoch 19/100 Train Accuracy: 98.94% Test Accuracy: 98.79% Time: 11.37s
+Epoch 20/100 Train Accuracy: 99.07% Test Accuracy: 98.90% Time: 11.31s
+Epoch 21/100 Train Accuracy: 99.06% Test Accuracy: 98.97% Time: 11.24s
+Epoch 22/100 Train Accuracy: 99.03% Test Accuracy: 98.76% Time: 11.35s
+Epoch 23/100 Train Accuracy: 99.23% Test Accuracy: 99.11% Time: 11.27s
+Epoch 24/100 Train Accuracy: 99.43% Test Accuracy: 99.14% Time: 11.23s
+Epoch 25/100 Train Accuracy: 99.38% Test Accuracy: 99.21% Time: 11.36s
+Epoch 26/100 Train Accuracy: 99.26% Test Accuracy: 98.98% Time: 11.19s
+Epoch 27/100 Train Accuracy: 99.14% Test Accuracy: 98.94% Time: 11.28s
+Epoch 28/100 Train Accuracy: 99.27% Test Accuracy: 99.10% Time: 11.15s
+Epoch 29/100 Train Accuracy: 99.53% Test Accuracy: 99.34% Time: 11.18s
+Epoch 30/100 Train Accuracy: 99.48% Test Accuracy: 99.27% Time: 11.17s
+Epoch 31/100 Train Accuracy: 99.56% Test Accuracy: 99.31% Time: 11.20s
+Epoch 32/100 Train Accuracy: 99.59% Test Accuracy: 99.45% Time: 11.11s
+Epoch 33/100 Train Accuracy: 99.69% Test Accuracy: 99.56% Time: 11.15s
+Epoch 34/100 Train Accuracy: 99.73% Test Accuracy: 99.55% Time: 11.18s
+Epoch 35/100 Train Accuracy: 99.72% Test Accuracy: 99.56% Time: 11.22s
+Epoch 36/100 Train Accuracy: 99.77% Test Accuracy: 99.55% Time: 11.11s
+Epoch 37/100 Train Accuracy: 99.77% Test Accuracy: 99.54% Time: 11.06s
+Epoch 38/100 Train Accuracy: 99.78% Test Accuracy: 99.59% Time: 11.13s
+Epoch 39/100 Train Accuracy: 99.80% Test Accuracy: 99.62% Time: 11.09s
+Epoch 40/100 Train Accuracy: 99.81% Test Accuracy: 99.62% Time: 11.07s
+Epoch 41/100 Train Accuracy: 99.85% Test Accuracy: 99.70% Time: 11.04s
+Epoch 42/100 Train Accuracy: 99.85% Test Accuracy: 99.70% Time: 11.04s
+Epoch 43/100 Train Accuracy: 99.87% Test Accuracy: 99.67% Time: 11.07s
+Epoch 44/100 Train Accuracy: 99.84% Test Accuracy: 99.69% Time: 11.09s
+Epoch 45/100 Train Accuracy: 99.88% Test Accuracy: 99.73% Time: 11.19s
+Epoch 46/100 Train Accuracy: 99.91% Test Accuracy: 99.71% Time: 11.15s
+Epoch 47/100 Train Accuracy: 99.89% Test Accuracy: 99.77% Time: 11.45s
+Epoch 48/100 Train Accuracy: 99.91% Test Accuracy: 99.80% Time: 11.12s
+Epoch 49/100 Train Accuracy: 99.89% Test Accuracy: 99.72% Time: 11.22s
+Epoch 50/100 Train Accuracy: 99.92% Test Accuracy: 99.78% Time: 11.14s
+Epoch 51/100 Train Accuracy: 99.92% Test Accuracy: 99.80% Time: 11.20s
+Epoch 52/100 Train Accuracy: 99.92% Test Accuracy: 99.75% Time: 11.15s
+Epoch 53/100 Train Accuracy: 99.91% Test Accuracy: 99.78% Time: 11.18s
+Epoch 54/100 Train Accuracy: 99.93% Test Accuracy: 99.78% Time: 11.13s
+Epoch 55/100 Train Accuracy: 99.94% Test Accuracy: 99.81% Time: 11.10s
+Epoch 56/100 Train Accuracy: 99.95% Test Accuracy: 99.84% Time: 11.08s
+Epoch 57/100 Train Accuracy: 99.95% Test Accuracy: 99.87% Time: 11.09s
+Epoch 58/100 Train Accuracy: 99.96% Test Accuracy: 99.78% Time: 11.12s
+Epoch 59/100 Train Accuracy: 99.97% Test Accuracy: 99.88% Time: 11.10s
+Epoch 60/100 Train Accuracy: 99.96% Test Accuracy: 99.89% Time: 11.21s
+Epoch 61/100 Train Accuracy: 99.97% Test Accuracy: 99.87% Time: 11.18s
+Epoch 62/100 Train Accuracy: 99.98% Test Accuracy: 99.89% Time: 11.02s
+Epoch 63/100 Train Accuracy: 99.97% Test Accuracy: 99.86% Time: 11.03s
+Epoch 64/100 Train Accuracy: 99.98% Test Accuracy: 99.86% Time: 11.18s
+Epoch 65/100 Train Accuracy: 99.98% Test Accuracy: 99.85% Time: 11.08s
+Epoch 66/100 Train Accuracy: 99.99% Test Accuracy: 99.91% Time: 11.06s
+Epoch 67/100 Train Accuracy: 99.98% Test Accuracy: 99.92% Time: 11.00s
+Epoch 68/100 Train Accuracy: 99.98% Test Accuracy: 99.89% Time: 10.98s
+Epoch 69/100 Train Accuracy: 99.98% Test Accuracy: 99.88% Time: 10.78s
+Epoch 70/100 Train Accuracy: 99.98% Test Accuracy: 99.91% Time: 10.88s
+Epoch 71/100 Train Accuracy: 99.99% Test Accuracy: 99.93% Time: 10.86s
+Epoch 72/100 Train Accuracy: 99.98% Test Accuracy: 99.89% Time: 10.79s
+Epoch 73/100 Train Accuracy: 99.98% Test Accuracy: 99.92% Time: 10.79s
+Epoch 74/100 Train Accuracy: 99.99% Test Accuracy: 99.86% Time: 10.83s
+Epoch 75/100 Train Accuracy: 99.97% Test Accuracy: 99.94% Time: 10.81s
+Epoch 76/100 Train Accuracy: 99.99% Test Accuracy: 99.95% Time: 10.79s
+Epoch 77/100 Train Accuracy: 100.00% Test Accuracy: 99.92% Time: 10.80s
+Epoch 78/100 Train Accuracy: 99.98% Test Accuracy: 99.96% Time: 10.80s
+Epoch 79/100 Train Accuracy: 99.99% Test Accuracy: 99.93% Time: 10.85s
+Epoch 80/100 Train Accuracy: 99.98% Test Accuracy: 99.93% Time: 10.83s
+Epoch 81/100 Train Accuracy: 100.00% Test Accuracy: 99.95% Time: 10.79s
+Epoch 82/100 Train Accuracy: 99.99% Test Accuracy: 99.96% Time: 10.82s
+Epoch 83/100 Train Accuracy: 99.99% Test Accuracy: 99.97% Time: 10.84s
+Epoch 84/100 Train Accuracy: 99.99% Test Accuracy: 99.94% Time: 10.81s
+Epoch 85/100 Train Accuracy: 99.98% Test Accuracy: 99.95% Time: 10.78s
+Epoch 86/100 Train Accuracy: 100.00% Test Accuracy: 99.96% Time: 10.70s
+Epoch 87/100 Train Accuracy: 100.00% Test Accuracy: 99.97% Time: 10.80s
+Epoch 88/100 Train Accuracy: 100.00% Test Accuracy: 99.98% Time: 10.71s
+Epoch 89/100 Train Accuracy: 99.99% Test Accuracy: 99.97% Time: 10.78s
+Epoch 90/100 Train Accuracy: 99.99% Test Accuracy: 99.97% Time: 10.75s
+Epoch 91/100 Train Accuracy: 100.00% Test Accuracy: 99.96% Time: 10.81s
+Epoch 92/100 Train Accuracy: 100.00% Test Accuracy: 99.95% Time: 10.67s
+Epoch 93/100 Train Accuracy: 99.99% Test Accuracy: 99.96% Time: 10.88s
+Epoch 94/100 Train Accuracy: 99.99% Test Accuracy: 99.96% Time: 10.84s
+Epoch 95/100 Train Accuracy: 100.00% Test Accuracy: 99.97% Time: 10.78s
+Epoch 96/100 Train Accuracy: 100.00% Test Accuracy: 99.96% Time: 10.91s
+Epoch 97/100 Train Accuracy: 99.99% Test Accuracy: 99.94% Time: 10.74s
+Epoch 98/100 Train Accuracy: 100.00% Test Accuracy: 99.98% Time: 10.79s
+Epoch 99/100 Train Accuracy: 100.00% Test Accuracy: 99.99% Time: 10.79s
+Epoch 100/100 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 10.69s

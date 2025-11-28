@@ -5,7 +5,6 @@ Streams output instead of capturing to avoid hangs
 """
 
 import subprocess
-import re
 
 def run_experiment(board_size=5, number_of_boards=50000, epochs=100, 
                    number_of_clauses=8000, T=12000, s=3.0, depth=3,
@@ -52,9 +51,9 @@ def main():
         'board_size': 5,
         'number_of_boards': 50000,
         'epochs': 100,
-        'number_of_clauses': 8000,
-        'T': 12000,
-        's': 3.0,
+        'number_of_clauses': 8000, #5k
+        'T': 12000, # 3-4k
+        's': 3.0, # 1-2
         'depth': 3,
         'hypervector_size': 512,
         'hypervector_bits': 2,
@@ -161,7 +160,7 @@ def main():
             print(f"  {key}: {value}", flush=True)
         
         print("\nCommand to reproduce:", flush=True)
-        print(f"uv run src/swstl.py \\", flush=True)
+        print("uv run src/swstl.py \\", flush=True)
         print(f"  --board-size {best_params['board_size']} \\", flush=True)
         print(f"  --number-of-boards {best_params['number_of_boards']} \\", flush=True)
         print(f"  --epochs {best_params['epochs']} \\", flush=True)

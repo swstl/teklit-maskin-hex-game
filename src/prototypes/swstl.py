@@ -12,20 +12,20 @@ import os
 def default_args(**kwargs):
     parser = argparse.ArgumentParser()
     parser.add_argument("--number-of-boards", "-n", default=50000, type=int)
-    parser.add_argument("--board-size", "-b", default=5, type=int)
-    parser.add_argument("--epochs", default=100, type=int)
-    parser.add_argument("--number-of-clauses", default=5000, type=int)
-    parser.add_argument("--T", default=10000, type=int)
-    parser.add_argument("--s", default=5.0, type=float)
+    parser.add_argument("--board-size", "-b", default=8, type=int)
+    parser.add_argument("--epochs", default=350, type=int)
+    parser.add_argument("--number-of-clauses", default=10000, type=int)
+    parser.add_argument("--T", default=5555, type=int)
+    parser.add_argument("--s", default=1.0, type=float)
     parser.add_argument("--number-of-state-bits", default=8, type=int)
     parser.add_argument("--depth", default=2, type=int)
     parser.add_argument("--hypervector-size", default=256, type=int)
     parser.add_argument("--hypervector-bits", default=4, type=int)
-    parser.add_argument("--message-size", default=32, type=int)
+    parser.add_argument("--message-size", default=32, type=int) # message passed between nodes its important aswell
     parser.add_argument("--message-bits", default=4, type=int)
     parser.add_argument("--double-hashing", dest="double_hashing", default=False, action="store_true")
     parser.add_argument("--one-hot-encoding", dest="one_hot_encoding", default=False, action="store_true")
-    parser.add_argument("--max-included-literals", default=32, type=int)
+    parser.add_argument("--max-included-literals", default=120, type=int) #makes the clauses include more specific things about the dataset (literals), too much can cause overfitting
 
     args = parser.parse_args()
     for key, value in kwargs.items():
@@ -64,7 +64,6 @@ def _load_hex_data(csv_path):
 ##################################################
 ################  Split the data  ################
 ##################################################
-#TODO: make this generate if file not found
 def get_hex_games(split, how_many=1000, board_size=3):
     csv_path = f'data/hex_games_{how_many}_size_{board_size}.csv'
     try:
@@ -199,8 +198,6 @@ def create_graphs(X_train, X_test, args):
     # symbols.extend(['top_left', 'top_right', 'bottom_left', 'bottom_right'])
 
 
-    # args.hypervector_size = len(symbols)
-
     # create the training graphs
     num_training_graphs = len(X_train)
     training_graph = Graphs(
@@ -222,7 +219,7 @@ def create_graphs(X_train, X_test, args):
     configure_graphs(test_graph, X_test)
 
 
-    return training_graph, test_graph
+    return training_graph, test_graph, symbols
 
 
 
@@ -254,19 +251,38 @@ def train_tm(tm, graph_train, Y_train, graph_test, Y_test, args):
 ###################################################
 ################ Print the clauses ################
 ###################################################
-def print_clauses(tm, hypervector_size):
+def print_clauses(tm, symbols, hypervector_size):
+    """
+    Print clauses with actual symbol names instead of feature indices
+    
+    Args:
+        tm: The trained Tsetlin Machine
+        symbols: List of symbol names
+        hypervector_size: Size of the hypervector
+    """
     weights = tm.get_state()[1].reshape(2, -1)
-    for i in range(tm.number_of_clauses):
-            print("Clause #%d Weights:(%d %d)" % (i, weights[0,i], weights[1,i]), end=' ')
-            l = []
-            for k in range(hypervector_size * 2):
-                if tm.ta_action(0, i, k):
-                    if k < hypervector_size:
-                        l.append("x%d" % (k))
-                    else:
-                        l.append("NOT x%d" % (k - hypervector_size))
+    
+    print(f"\nSymbols: {symbols}")
+    print(f"Number of symbols: {len(symbols)}")
+    print(f"Hypervector size: {hypervector_size}\n")
+    
+    for i in range(min(10, tm.number_of_clauses)):  # Print first 10 clauses
+        print("Clause #%d Weights:(%d %d)" % (i, weights[0,i], weights[1,i]), end=' ')
+        l = []
+        
+        for k in range(hypervector_size * 2):
+            if tm.ta_action(0, i, k):
+                if k < hypervector_size:
+                    # Positive literal
+                    l.append(f"x{k}")
+                else:
+                    # Negated literal
+                    l.append(f"NOT x{k - hypervector_size}")
+        
+        if l:
             print(" AND ".join(l))
-
+        else:
+            print("(empty clause)")
 
 
 ###################################################
@@ -295,6 +311,6 @@ tm = MultiClassGraphTsetlinMachine(
 
 print_args(args)
 x_train, y_train, x_test, y_test = get_hex_games(0.8, how_many=args.number_of_boards, board_size=args.board_size)
-train_graph, test_graph = create_graphs(x_train, x_test, args)
+train_graph, test_graph, symbols = create_graphs(x_train, x_test, args)
 train_tm(tm, train_graph, y_train, test_graph, y_test, args)
-# print_clauses(tm, args.hypervector_size)
+print_clauses(tm, symbols, args.hypervector_size)
