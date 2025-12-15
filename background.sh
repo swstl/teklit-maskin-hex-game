@@ -10,12 +10,12 @@ NC='\033[0m' # No Color
 
 # Usage: ./run_in_background.sh <script.py> [script args...]
 if [ -z "$1" ] ; then
-    echo "Usage: ./run_in_background.sh <script.py> [script args...]"
-    echo "Example: ./run_in_background.sh src/swstl.py -b 10 -s 10 -t 10"
+    echo "Usage: ./background.sh <script.py> [script args...]"
+    echo "Example: ./background.sh src/swstl.py -b 10 -s 10 -t 10"
     exit 1
 fi
 script="$1"
-output="output.log"
+output="$1.log"
 shift 1  # Remove first arg, leaving only script arguments
 script_args="$@"
 # Check if script exists

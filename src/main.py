@@ -1,5 +1,6 @@
 from GraphTsetlinMachine.tm import MultiClassGraphTsetlinMachine
-from graphs.v3 import create_graphs
+# from utils.cache import get_or_create_graphs
+from graphs.v2 import create_graphs
 
 import pandas as pd
 import numpy as np
@@ -11,21 +12,22 @@ import os
 
 def default_args(**kwargs):
     parser = argparse.ArgumentParser()
-    parser.add_argument("--number-of-boards", "-n", default=50000, type=int)
-    parser.add_argument("--board-size", "-b", default=8, type=int)
-    parser.add_argument("--epochs", default=350, type=int)
-    parser.add_argument("--number-of-clauses", default=10000, type=int)
-    parser.add_argument("--T", default=5555, type=int)
-    parser.add_argument("--s", default=1.0, type=float)
+    parser.add_argument("--moves-before-win", "-m", default=0, type=int)
+    parser.add_argument("--number-of-boards", "-n", default=100000, type=int)
+    parser.add_argument("--board-size", "-b", default=21, type=int)
+    parser.add_argument("--epochs", default=150, type=int)
+    parser.add_argument("--number-of-clauses", default=32000, type=int)
+    parser.add_argument("--T", default=6000, type=int) # try increasing to 7000
+    parser.add_argument("--s", default=1.5, type=float)
     parser.add_argument("--number-of-state-bits", default=8, type=int)
     parser.add_argument("--depth", default=2, type=int)
     parser.add_argument("--hypervector-size", default=256, type=int)
     parser.add_argument("--hypervector-bits", default=4, type=int)
-    parser.add_argument("--message-size", default=32, type=int) # message passed between nodes its important aswell
+    parser.add_argument("--message-size", default=82, type=int)
     parser.add_argument("--message-bits", default=4, type=int)
     parser.add_argument("--double-hashing", dest="double_hashing", default=False, action="store_true")
     parser.add_argument("--one-hot-encoding", dest="one_hot_encoding", default=False, action="store_true")
-    parser.add_argument("--max-included-literals", default=120, type=int) #makes the clauses include more specific things about the dataset (literals), too much can cause overfitting??
+    parser.add_argument("--max-included-literals", default=250, type=int) #makes the clauses include more specific things about the dataset (literals), too much can cause overfitting??
 
     args = parser.parse_args()
     for key, value in kwargs.items():
@@ -39,37 +41,62 @@ def print_args(args):
         print(f"  {arg}: {value}")
 
 def _load_hex_data(csv_path):
-    """Load the Hex game CSV data"""
+    """Load the Hex game CSV data with caching"""
+    cache_path = csv_path.replace('.csv', '_cached.npz')
+ 
+    if os.path.exists(cache_path):
+        print(f"Loading from cache: {cache_path}")
+        cached = np.load(cache_path, allow_pickle=True)
+        return list(cached['boards']), cached['labels']
+ 
+    print(f"No cache found, loading CSV: {csv_path}")
     df = pd.read_csv(csv_path)
  
     board_columns = [col for col in df.columns if col.startswith('cell')]
  
     max_row = max(int(col.replace('cell', '').split('_')[0]) for col in board_columns)
     max_col = max(int(col.replace('cell', '').split('_')[1]) for col in board_columns)
-    board_size = max(max_row, max_col) + 1  # +1 because indices start at 0
+    board_size = max(max_row, max_col) + 1
  
     boards = []
-    for _, row in df.iterrows():
+    board_data = df[board_columns].values
+
+    for row_data in board_data:
         board = np.zeros((board_size, board_size), dtype=int)
-        for col in board_columns:
+        for idx, col in enumerate(board_columns):
             parts = col.replace('cell', '').split('_')
             r, c = int(parts[0]), int(parts[1])
-            board[r, c] = row[col]
+            board[r, c] = row_data[idx]
         boards.append(board)
  
     labels = np.array(df['winner'].values)
+ 
+    print(f"Saving to cache: {cache_path}")
+    np.savez_compressed(cache_path, boards=np.array(boards, dtype=object), labels=labels)
+ 
     return boards, labels
+
 
 
 ##################################################
 ################  Split the data  ################
 ##################################################
-def get_hex_games(split, how_many=1000, board_size=3):
-    csv_path = f'data/hex_games_{how_many}_size_{board_size}.csv'
-    try:
-        b, t = _load_hex_data(csv_path)
+def get_hex_games(split, args, folder='data'):
+    os.makedirs(folder, exist_ok=True)
 
-        print(f"Loaded {len(b)} games from {csv_path}")
+    how_many = args.number_of_boards
+    board_size = args.board_size
+    moves_before_win = args.moves_before_win
+
+    if moves_before_win > 0:
+        csv_file = f'hex_games_{how_many}_size_{board_size}_stop_{moves_before_win}.csv'
+    else:
+        csv_file = f'hex_games_{how_many}_size_{board_size}.csv'
+
+    try:
+        b, t = _load_hex_data(os.path.join(folder, csv_file))
+
+        print(f"Loaded {len(b)} games from {csv_file}")
 
         split = int(len(b)*split)
         indices = np.random.permutation(len(b))
@@ -85,15 +112,11 @@ def get_hex_games(split, how_many=1000, board_size=3):
         # generate the file
         script_dir = os.path.dirname(os.path.abspath(__file__))
         hex_executable = os.path.join(script_dir, 'dataset', 'hex')
-        subprocess.run([hex_executable, '-b', str(board_size), '-g', str(how_many)], check=True)
-
+        subprocess.run([hex_executable, '-b', str(board_size), '-g', str(how_many), '-s', str(moves_before_win)], check=True)
         # move the file
-        os.makedirs('data', exist_ok=True)
-        generated_file = f'hex_games_{how_many}_size_{board_size}.csv'
-        shutil.move(generated_file, csv_path)
-
+        shutil.move(csv_file, os.path.join(folder, csv_file))
         # rerun
-        return get_hex_games(split, how_many, board_size)
+        return get_hex_games(split, args)
 
 
 
@@ -160,6 +183,7 @@ def print_clauses(tm, symbols, hypervector_size):
             print("(empty clause)")
 
 
+
 ###################################################
 ################ Print the clauses ################
 ###################################################
@@ -185,7 +209,8 @@ tm = MultiClassGraphTsetlinMachine(
 )
 
 print_args(args)
-x_train, y_train, x_test, y_test = get_hex_games(0.8, how_many=args.number_of_boards, board_size=args.board_size)
+x_train, y_train, x_test, y_test = get_hex_games(0.8, args)
+# train_graph, test_graph, symbols = get_or_create_graphs(x_train, x_test, args, create_graphs)
 train_graph, test_graph, symbols = create_graphs(x_train, x_test, args)
 train_tm(tm, train_graph, y_train, test_graph, y_test, args)
 print_clauses(tm, symbols, args.hypervector_size)

@@ -1,5 +1,6 @@
 // Copyright (c) 2024 Ole-Christoffer Granmo
 // Modified to accept command line arguments
+// Added stop parameter to remove last X moves before game ends
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,6 +10,7 @@
 
 int BOARD_DIM = 5;
 int NUM_GAMES = 1000;
+int STOP_MOVES = 0;
 
 int *neighbors;
 
@@ -140,6 +142,17 @@ int hg_get_cell(struct hex_game *hg, int row, int col)
 	return 0;
 }
 
+void hg_remove_last_moves(struct hex_game *hg, int num_moves, int total_moves)
+{
+	for (int i = 0; i < num_moves && i < total_moves; ++i) {
+		int move_index = total_moves - 1 - i;
+		int position = hg->moves[move_index];
+		
+		hg->board[position * 2] = 0;
+		hg->board[position * 2 + 1] = 0;
+	}
+}
+
 void hg_write_csv_row(FILE *f, struct hex_game *hg, int winner)
 {
 	for (int i = 0; i < BOARD_DIM; ++i) {
@@ -161,22 +174,26 @@ void hg_write_csv_header(FILE *f)
 }
 
 void print_usage(char *prog_name) {
-	printf("Usage: %s [-g num_games] [-b board_size] [-h]\n", prog_name);
+	printf("Usage: %s [-g num_games] [-b board_size] [-s stop_moves] [-h]\n", prog_name);
 	printf("  -g NUM    Number of games to generate (default: 1000)\n");
 	printf("  -b SIZE   Board dimension (default: 5)\n");
+	printf("  -s NUM    Stop NUM moves before game ends (default: 0)\n");
 	printf("  -h        Show this help message\n");
 }
 
 int main(int argc, char *argv[]) {
 	int opt;
 	
-	while ((opt = getopt(argc, argv, "g:b:h")) != -1) {
+	while ((opt = getopt(argc, argv, "g:b:s:h")) != -1) {
 		switch (opt) {
 			case 'g':
 				NUM_GAMES = atoi(optarg);
 				break;
 			case 'b':
 				BOARD_DIM = atoi(optarg);
+				break;
+			case 's':
+				STOP_MOVES = atoi(optarg);
 				break;
 			case 'h':
 				print_usage(argv[0]);
@@ -187,7 +204,8 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	printf("Generating %d games on %dx%d board...\n", NUM_GAMES, BOARD_DIM, BOARD_DIM);
+	printf("Generating %d games on %dx%d board (stopping %d moves early)...\n", 
+	       NUM_GAMES, BOARD_DIM, BOARD_DIM, STOP_MOVES);
 
 	struct hex_game hg;
 	
@@ -196,7 +214,11 @@ int main(int argc, char *argv[]) {
 	hg_alloc(&hg);
 
 	char filename[100];
-	sprintf(filename, "hex_games_%d_size_%d.csv", NUM_GAMES, BOARD_DIM);
+	if (STOP_MOVES > 0) {
+		sprintf(filename, "hex_games_%d_size_%d_stop_%d.csv", NUM_GAMES, BOARD_DIM, STOP_MOVES);
+	} else {
+		sprintf(filename, "hex_games_%d_size_%d.csv", NUM_GAMES, BOARD_DIM);
+	}
 
 	FILE *f = fopen(filename, "w");
 	hg_write_csv_header(f);
@@ -207,8 +229,10 @@ int main(int argc, char *argv[]) {
 		hg_init(&hg);
 
 		int player = 0;
+		int total_moves = 0;
 		while (!hg_full_board(&hg)) {
 			int position = hg_place_piece_randomly(&hg, player);
+			total_moves++;
 			
 			if (hg_winner(&hg, player, position)) {
 				winner = player;
@@ -216,6 +240,10 @@ int main(int argc, char *argv[]) {
 			}
 
 			player = 1 - player;
+		}
+
+		if (STOP_MOVES > 0) {
+			hg_remove_last_moves(&hg, STOP_MOVES, total_moves);
 		}
 
 		hg_write_csv_row(f, &hg, winner);

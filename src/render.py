@@ -1,5 +1,8 @@
 import tkinter as tk
 import math
+import numpy as np
+import pandas as pd
+import os
 
 def create_hexagon(canvas, cx, cy, radius, **kwargs):
     points = []
@@ -132,3 +135,44 @@ def simple_hex_render(b):
         print()
         print(" "*(i+1), end='')
 
+
+
+def _load_hex_data(csv_path):
+    """Load the Hex game CSV data with caching"""
+    cache_path = csv_path.replace('.csv', '_cached.npz')
+ 
+    if os.path.exists(cache_path):
+        print(f"Loading from cache: {cache_path}")
+        cached = np.load(cache_path, allow_pickle=True)
+        return list(cached['boards']), cached['labels']
+ 
+    print(f"No cache found, loading CSV: {csv_path}")
+    df = pd.read_csv(csv_path)
+ 
+    board_columns = [col for col in df.columns if col.startswith('cell')]
+ 
+    max_row = max(int(col.replace('cell', '').split('_')[0]) for col in board_columns)
+    max_col = max(int(col.replace('cell', '').split('_')[1]) for col in board_columns)
+    board_size = max(max_row, max_col) + 1
+ 
+    boards = []
+    board_data = df[board_columns].values
+
+    for row_data in board_data:
+        board = np.zeros((board_size, board_size), dtype=int)
+        for idx, col in enumerate(board_columns):
+            parts = col.replace('cell', '').split('_')
+            r, c = int(parts[0]), int(parts[1])
+            board[r, c] = row_data[idx]
+        boards.append(board)
+ 
+    labels = np.array(df['winner'].values)
+ 
+    print(f"Saving to cache: {cache_path}")
+    np.savez_compressed(cache_path, boards=np.array(boards, dtype=object), labels=labels)
+ 
+    return boards, labels
+
+if __name__ == "__main__":    # Example usage
+    boards, labels = _load_hex_data('src/dataset/hex_games_10_size_10_stop_3.csv')
+    draw_simple_board(boards[0], radius=30, red_val=-1, blue_val=1)#         from src.generate_hex_data import generate_hex_data
