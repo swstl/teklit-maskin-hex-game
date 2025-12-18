@@ -17,7 +17,7 @@ Arguments:
   message_bits: 4
   double_hashing: False
   one_hot_encoding: False
-  max_included_literals: 100
+  max_included_literals: 250
 Loaded 50000 games from data/hex_games_50000_size_6.csv
 Creating graphs on dataset of length training: 40000, and test: 10000...
 Training for 200 epochs...

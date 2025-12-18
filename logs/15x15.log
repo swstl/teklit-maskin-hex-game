@@ -1,0 +1,44 @@
+Initialization of sparse structure.
+Arguments:
+  number_of_boards: 100000
+  board_size: 15
+  epochs: 150
+  number_of_clauses: 23000
+  T: 6000
+  s: 1.5
+  number_of_state_bits: 8
+  depth: 2
+  hypervector_size: 256
+  hypervector_bits: 4
+  message_size: 82
+  message_bits: 4
+  double_hashing: False
+  one_hot_encoding: False
+  max_included_literals: 250
+No cache found, loading CSV: data/hex_games_100000_size_15.csv
+Generating 100000 games on 15x15 board...
+Done! Generated 100000 games. Output: hex_games_100000_size_15.csv
+No cache found, loading CSV: data/hex_games_100000_size_15.csv
+Saving to cache: data/hex_games_100000_size_15_cached.npz
+Loaded 100000 games from data/hex_games_100000_size_15.csv
+Creating graphs on dataset of length training: 80000, and test: 20000...
+Training for 150 epochs...
+Epoch 1/150 Train Accuracy: 61.21% Test Accuracy: 60.06% Time: 167.43s
+Epoch 2/150 Train Accuracy: 67.90% Test Accuracy: 67.32% Time: 160.41s
+Epoch 3/150 Train Accuracy: 74.43% Test Accuracy: 73.28% Time: 158.92s
+Epoch 4/150 Train Accuracy: 80.47% Test Accuracy: 79.27% Time: 157.14s
+Epoch 5/150 Train Accuracy: 86.33% Test Accuracy: 85.61% Time: 157.06s
+Epoch 6/150 Train Accuracy: 92.55% Test Accuracy: 92.03% Time: 156.51s
+Epoch 7/150 Train Accuracy: 95.27% Test Accuracy: 94.58% Time: 156.09s
+Epoch 8/150 Train Accuracy: 98.01% Test Accuracy: 97.78% Time: 155.30s
+Epoch 9/150 Train Accuracy: 98.78% Test Accuracy: 98.59% Time: 155.07s
+Epoch 10/150 Train Accuracy: 99.66% Test Accuracy: 99.62% Time: 157.17s
+Epoch 11/150 Train Accuracy: 99.86% Test Accuracy: 99.84% Time: 155.20s
+Epoch 12/150 Train Accuracy: 99.76% Test Accuracy: 99.71% Time: 155.17s
+Epoch 13/150 Train Accuracy: 99.98% Test Accuracy: 99.98% Time: 153.65s
+Epoch 14/150 Train Accuracy: 99.98% Test Accuracy: 99.99% Time: 153.55s
+Epoch 15/150 Train Accuracy: 99.99% Test Accuracy: 100.00% Time: 153.17s
+Epoch 16/150 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 153.23s
+Epoch 17/150 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 151.88s
+Epoch 18/150 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 151.60s
+Epoch 19/150 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 151.18s

@@ -1,0 +1,255 @@
+coder@coder-sanderw-alt-mulig-machine-855556d549-sxvjf:~/teklit-maskin$ cat output.log 
+Initialization of sparse structure.
+Arguments:
+  number_of_boards: 100000
+  board_size: 14
+  epochs: 350
+  number_of_clauses: 19000
+  T: 6000
+  s: 2.0
+  number_of_state_bits: 8
+  depth: 2
+  hypervector_size: 256
+  hypervector_bits: 4
+  message_size: 82
+  message_bits: 4
+  double_hashing: False
+  one_hot_encoding: False
+  max_included_literals: 250
+No cache found, loading CSV: data/hex_games_100000_size_14.csv
+Generating 100000 games on 14x14 board...
+Done! Generated 100000 games. Output: hex_games_100000_size_14.csv
+No cache found, loading CSV: data/hex_games_100000_size_14.csv
+Saving to cache: data/hex_games_100000_size_14_cached.npz
+Loaded 100000 games from data/hex_games_100000_size_14.csv
+Creating graphs on dataset of length training: 80000, and test: 20000...
+Training for 350 epochs...
+Epoch 1/350 Train Accuracy: 62.23% Test Accuracy: 62.22% Time: 116.36s
+Epoch 2/350 Train Accuracy: 69.01% Test Accuracy: 68.84% Time: 109.55s
+Epoch 3/350 Train Accuracy: 76.19% Test Accuracy: 76.09% Time: 109.38s
+Epoch 4/350 Train Accuracy: 80.69% Test Accuracy: 80.29% Time: 108.43s
+Epoch 5/350 Train Accuracy: 87.36% Test Accuracy: 87.04% Time: 108.21s
+Epoch 6/350 Train Accuracy: 92.36% Test Accuracy: 92.04% Time: 108.14s
+Epoch 7/350 Train Accuracy: 95.17% Test Accuracy: 94.87% Time: 106.80s
+Epoch 8/350 Train Accuracy: 97.37% Test Accuracy: 97.09% Time: 107.08s
+Epoch 9/350 Train Accuracy: 98.28% Test Accuracy: 98.29% Time: 106.51s
+Epoch 10/350 Train Accuracy: 98.69% Test Accuracy: 98.50% Time: 106.22s
+Epoch 11/350 Train Accuracy: 99.21% Test Accuracy: 99.12% Time: 105.89s
+Epoch 12/350 Train Accuracy: 99.36% Test Accuracy: 99.34% Time: 105.58s
+Epoch 13/350 Train Accuracy: 97.45% Test Accuracy: 97.44% Time: 105.34s
+
+
+f:~/teklit-maskin$ cat output.log 
+Initialization of sparse structure.
+Arguments:
+  number_of_boards: 100000
+  board_size: 14
+  epochs: 350
+  number_of_clauses: 19000
+  T: 6000
+  s: 2.0
+  number_of_state_bits: 8
+  depth: 2
+  hypervector_size: 256
+  hypervector_bits: 4
+  message_size: 82
+  message_bits: 4
+  double_hashing: False
+  one_hot_encoding: False
+  max_included_literals: 250
+Loading from cache: data/hex_games_100000_size_14_cached.npz
+Loaded 100000 games from data/hex_games_100000_size_14.csv
+Creating graphs on dataset of length training: 80000, and test: 20000...
+Training for 350 epochs...
+Epoch 1/350 Train Accuracy: 64.28% Test Accuracy: 63.88% Time: 114.06s
+Epoch 2/350 Train Accuracy: 72.98% Test Accuracy: 72.52% Time: 109.04s
+Epoch 3/350 Train Accuracy: 79.93% Test Accuracy: 79.56% Time: 109.12s
+Epoch 4/350 Train Accuracy: 86.02% Test Accuracy: 85.43% Time: 108.16s
+Epoch 5/350 Train Accuracy: 92.81% Test Accuracy: 92.27% Time: 108.23s
+Epoch 6/350 Train Accuracy: 95.62% Test Accuracy: 95.17% Time: 107.32s
+Epoch 7/350 Train Accuracy: 95.89% Test Accuracy: 95.67% Time: 107.86s
+Epoch 8/350 Train Accuracy: 96.19% Test Accuracy: 96.11% Time: 107.01s
+Epoch 9/350 Train Accuracy: 97.68% Test Accuracy: 97.47% Time: 107.42s
+Epoch 10/350 Train Accuracy: 98.66% Test Accuracy: 98.53% Time: 106.34s
+Epoch 11/350 Train Accuracy: 98.78% Test Accuracy: 98.72% Time: 105.58s
+Epoch 12/350 Train Accuracy: 99.00% Test Accuracy: 98.93% Time: 105.67s
+Epoch 13/350 Train Accuracy: 99.30% Test Accuracy: 99.23% Time: 106.12s
+Epoch 14/350 Train Accuracy: 99.25% Test Accuracy: 99.19% Time: 105.48s
+Epoch 15/350 Train Accuracy: 99.16% Test Accuracy: 99.00% Time: 107.63s
+Epoch 16/350 Train Accuracy: 99.47% Test Accuracy: 99.32% Time: 105.12s
+Epoch 17/350 Train Accuracy: 99.42% Test Accuracy: 99.31% Time: 104.44s
+Epoch 18/350 Train Accuracy: 99.25% Test Accuracy: 99.22% Time: 103.79s
+Epoch 19/350 Train Accuracy: 99.27% Test Accuracy: 99.26% Time: 103.98s
+Epoch 20/350 Train Accuracy: 99.34% Test Accuracy: 99.22% Time: 103.56s
+Epoch 21/350 Train Accuracy: 99.03% Test Accuracy: 99.04% Time: 103.49s
+Epoch 22/350 Train Accuracy: 99.44% Test Accuracy: 99.34% Time: 103.67s
+Epoch 23/350 Train Accuracy: 98.56% Test Accuracy: 98.45% Time: 102.99s
+Epoch 24/350 Train Accuracy: 98.65% Test Accuracy: 98.57% Time: 103.32s
+Epoch 25/350 Train Accuracy: 97.18% Test Accuracy: 96.91% Time: 104.01s
+Epoch 26/350 Train Accuracy: 98.34% Test Accuracy: 98.26% Time: 105.71s
+Epoch 27/350 Train Accuracy: 98.87% Test Accuracy: 98.63% Time: 105.16s
+Epoch 28/350 Train Accuracy: 99.00% Test Accuracy: 98.88% Time: 104.88s
+Epoch 29/350 Train Accuracy: 98.95% Test Accuracy: 98.84% Time: 102.70s
+Epoch 30/350 Train Accuracy: 98.45% Test Accuracy: 98.28% Time: 102.65s
+Epoch 31/350 Train Accuracy: 98.43% Test Accuracy: 98.23% Time: 102.90s
+Epoch 32/350 Train Accuracy: 98.39% Test Accuracy: 98.24% Time: 102.28s
+Epoch 33/350 Train Accuracy: 98.83% Test Accuracy: 98.66% Time: 102.60s
+Epoch 34/350 Train Accuracy: 98.68% Test Accuracy: 98.56% Time: 102.29s
+Epoch 35/350 Train Accuracy: 97.67% Test Accuracy: 97.44% Time: 102.41s
+Epoch 36/350 Train Accuracy: 97.61% Test Accuracy: 97.58% Time: 102.25s
+Epoch 37/350 Train Accuracy: 98.49% Test Accuracy: 98.28% Time: 102.21s
+Epoch 38/350 Train Accuracy: 98.71% Test Accuracy: 98.54% Time: 102.75s
+Epoch 39/350 Train Accuracy: 98.76% Test Accuracy: 98.61% Time: 102.19s
+Epoch 40/350 Train Accuracy: 98.43% Test Accuracy: 98.32% Time: 102.40s
+Epoch 41/350 Train Accuracy: 98.65% Test Accuracy: 98.48% Time: 103.07s
+Epoch 42/350 Train Accuracy: 98.31% Test Accuracy: 98.28% Time: 101.79s
+Epoch 43/350 Train Accuracy: 98.27% Test Accuracy: 98.19% Time: 102.67s
+Epoch 44/350 Train Accuracy: 98.77% Test Accuracy: 98.63% Time: 101.43s
+Epoch 45/350 Train Accuracy: 98.41% Test Accuracy: 98.37% Time: 101.99s
+coder@coder-sanderw-alt-mulig-machine-855556d549-sxvjf:~/teklit-maskin$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2main.py.log  3main.py.log  background.sh  cache  data	main.py  makefile  output.log  parameter-search.py  pyproject.toml  README.md  simple-param-search.py  src  uv.lock
+coder@coder-sanderw-alt-mulig-machine-64c64485c-dr226:~/teklit-maskin$ cat *.log
+Initialization of sparse structure.
+Arguments:
+  number_of_boards: 100000
+  board_size: 14
+  epochs: 350
+  number_of_clauses: 23000
+  T: 6000
+  s: 1.5
+  number_of_state_bits: 8
+  depth: 2
+  hypervector_size: 256
+  hypervector_bits: 4
+  message_size: 96
+  message_bits: 4
+  double_hashing: False
+  one_hot_encoding: False
+  max_included_literals: 250
+Loading from cache: data/hex_games_100000_size_14_cached.npz
+Loaded 100000 games from data/hex_games_100000_size_14.csv
+Creating graphs on dataset of length training: 80000, and test: 20000...
+Training for 350 epochs...
+Epoch 1/350 Train Accuracy: 64.18% Test Accuracy: 64.19% Time: 595.28s
+Epoch 2/350 Train Accuracy: 71.73% Test Accuracy: 71.56% Time: 637.51s
+Epoch 3/350 Train Accuracy: 75.58% Test Accuracy: 75.73% Time: 635.97s
+Epoch 4/350 Train Accuracy: 82.67% Test Accuracy: 82.45% Time: 634.31s
+Epoch 5/350 Train Accuracy: 92.98% Test Accuracy: 92.49% Time: 633.11s
+Epoch 6/350 Train Accuracy: 92.61% Test Accuracy: 92.44% Time: 631.85s
+Epoch 7/350 Train Accuracy: 99.06% Test Accuracy: 98.96% Time: 630.75s
+Epoch 8/350 Train Accuracy: 99.41% Test Accuracy: 99.28% Time: 629.81s
+Epoch 9/350 Train Accuracy: 99.74% Test Accuracy: 99.64% Time: 628.77s
+Epoch 10/350 Train Accuracy: 98.88% Test Accuracy: 98.83% Time: 627.85s
+Epoch 11/350 Train Accuracy: 99.89% Test Accuracy: 99.89% Time: 626.91s
+Epoch 12/350 Train Accuracy: 99.94% Test Accuracy: 99.96% Time: 626.16s
+Epoch 13/350 Train Accuracy: 99.95% Test Accuracy: 99.97% Time: 625.18s
+Epoch 14/350 Train Accuracy: 99.88% Test Accuracy: 99.91% Time: 624.53s
+Epoch 15/350 Train Accuracy: 99.97% Test Accuracy: 99.98% Time: 624.24s
+Epoch 16/350 Train Accuracy: 99.87% Test Accuracy: 99.84% Time: 623.38s
+Epoch 17/350 Train Accuracy: 99.91% Test Accuracy: 99.89% Time: 622.99s
+Epoch 18/350 Train Accuracy: 99.94% Test Accuracy: 99.91% Time: 622.48s
+Epoch 19/350 Train Accuracy: 99.96% Test Accuracy: 99.92% Time: 622.37s
+Epoch 20/350 Train Accuracy: 99.44% Test Accuracy: 99.33% Time: 621.65s
+Epoch 21/350 Train Accuracy: 99.87% Test Accuracy: 99.81% Time: 621.15s
+Epoch 22/350 Train Accuracy: 99.98% Test Accuracy: 99.94% Time: 620.39s
+Epoch 23/350 Train Accuracy: 99.99% Test Accuracy: 99.96% Time: 620.39s
+Epoch 24/350 Train Accuracy: 99.89% Test Accuracy: 99.91% Time: 619.62s
+Epoch 25/350 Train Accuracy: 99.88% Test Accuracy: 99.89% Time: 619.49s
+Epoch 26/350 Train Accuracy: 100.00% Test Accuracy: 99.98% Time: 619.61s
+Epoch 27/350 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 619.10s
+Epoch 28/350 Train Accuracy: 99.80% Test Accuracy: 99.77% Time: 619.07s
+Epoch 29/350 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 619.26s
+Epoch 30/350 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 619.29s
+Epoch 31/350 Train Accuracy: 99.92% Test Accuracy: 99.94% Time: 618.89s
+Epoch 32/350 Train Accuracy: 99.80% Test Accuracy: 99.80% Time: 619.03s
+Epoch 33/350 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 618.69s
+Epoch 34/350 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 618.58s
+
+
+
+
+Initialization of sparse structure.
+Arguments:
+  number_of_boards: 100000
+  board_size: 14
+  epochs: 350
+  number_of_clauses: 23000
+  T: 6000
+  s: 1.5
+  number_of_state_bits: 8
+  depth: 2
+  hypervector_size: 256
+  hypervector_bits: 4
+  message_size: 82
+  message_bits: 4
+  double_hashing: False
+  one_hot_encoding: False
+  max_included_literals: 250
+Loading from cache: data/hex_games_100000_size_14_cached.npz
+Loaded 100000 games from data/hex_games_100000_size_14.csv
+Creating graphs on dataset of length training: 80000, and test: 20000...
+Training for 350 epochs...
+Epoch 1/350 Train Accuracy: 60.22% Test Accuracy: 59.88% Time: 654.79s
+Epoch 2/350 Train Accuracy: 71.28% Test Accuracy: 70.69% Time: 646.52s
+Epoch 3/350 Train Accuracy: 82.06% Test Accuracy: 81.41% Time: 644.97s
+Epoch 4/350 Train Accuracy: 89.19% Test Accuracy: 88.32% Time: 643.54s
+Epoch 5/350 Train Accuracy: 96.64% Test Accuracy: 96.14% Time: 642.29s
+Epoch 6/350 Train Accuracy: 98.67% Test Accuracy: 98.36% Time: 640.96s
+Epoch 7/350 Train Accuracy: 99.68% Test Accuracy: 99.54% Time: 639.89s
+Epoch 8/350 Train Accuracy: 99.87% Test Accuracy: 99.83% Time: 639.03s
+Epoch 9/350 Train Accuracy: 99.91% Test Accuracy: 99.89% Time: 637.86s
+Epoch 10/350 Train Accuracy: 99.94% Test Accuracy: 99.92% Time: 637.05s
+Epoch 11/350 Train Accuracy: 99.94% Test Accuracy: 99.93% Time: 636.03s
+Epoch 12/350 Train Accuracy: 99.96% Test Accuracy: 99.95% Time: 635.34s
+Epoch 13/350 Train Accuracy: 99.98% Test Accuracy: 99.97% Time: 634.47s
+Epoch 14/350 Train Accuracy: 99.99% Test Accuracy: 100.00% Time: 633.78s
+Epoch 15/350 Train Accuracy: 99.99% Test Accuracy: 100.00% Time: 633.36s
+Epoch 16/350 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 632.46s
+Epoch 17/350 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 631.92s
+Epoch 18/350 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 631.30s
+Epoch 19/350 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 630.82s
+Epoch 20/350 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 630.31s
+Epoch 21/350 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 629.96s
+Epoch 22/350 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 629.07s
+Epoch 23/350 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 629.14s
+Epoch 24/350 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 628.73s
+Epoch 25/350 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 628.79s
+Epoch 26/350 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 628.78s
+Epoch 27/350 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 628.34s
+Epoch 28/350 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 628.27s
+Epoch 29/350 Train Accuracy: 99.83% Test Accuracy: 99.80% Time: 628.40s
+Epoch 30/350 Train Accuracy: 99.86% Test Accuracy: 99.83% Time: 628.42s
+Epoch 31/350 Train Accuracy: 99.75% Test Accuracy: 99.72% Time: 628.55s
+Epoch 32/350 Train Accuracy: 99.94% Test Accuracy: 99.91% Time: 628.35s
+Epoch 33/350 Train Accuracy: 99.99% Test Accuracy: 99.98% Time: 627.94s
+Epoch 34/350 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 628.04s

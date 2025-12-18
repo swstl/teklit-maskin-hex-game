@@ -1,0 +1,48 @@
+Initialization of sparse structure.
+Arguments:
+  number_of_boards: 100000
+  board_size: 16
+  epochs: 150
+  number_of_clauses: 23000
+  T: 6000
+  s: 1.5
+  number_of_state_bits: 8
+  depth: 2
+  hypervector_size: 256
+  hypervector_bits: 4
+  message_size: 82
+  message_bits: 4
+  double_hashing: False
+  one_hot_encoding: False
+  max_included_literals: 250
+Loading from cache: data/hex_games_100000_size_16_cached.npz
+Loaded 100000 games from data/hex_games_100000_size_16.csv
+Creating graphs on dataset of length training: 80000, and test: 20000...
+Training for 150 epochs...
+Epoch 1/150 Train Accuracy: 55.72% Test Accuracy: 55.07% Time: 175.83s
+Epoch 2/150 Train Accuracy: 60.02% Test Accuracy: 59.20% Time: 169.05s
+Epoch 3/150 Train Accuracy: 62.41% Test Accuracy: 61.35% Time: 169.05s
+Epoch 4/150 Train Accuracy: 70.16% Test Accuracy: 68.86% Time: 167.81s
+Epoch 5/150 Train Accuracy: 63.72% Test Accuracy: 62.98% Time: 168.10s
+Epoch 6/150 Train Accuracy: 72.97% Test Accuracy: 72.06% Time: 166.56s
+Epoch 7/150 Train Accuracy: 72.90% Test Accuracy: 72.03% Time: 169.18s
+Epoch 8/150 Train Accuracy: 80.60% Test Accuracy: 79.76% Time: 167.64s
+Epoch 9/150 Train Accuracy: 83.65% Test Accuracy: 82.62% Time: 166.02s
+Epoch 10/150 Train Accuracy: 90.53% Test Accuracy: 90.11% Time: 165.24s
+Epoch 11/150 Train Accuracy: 93.51% Test Accuracy: 93.03% Time: 164.80s
+Epoch 12/150 Train Accuracy: 98.91% Test Accuracy: 98.61% Time: 164.54s
+Epoch 13/150 Train Accuracy: 98.41% Test Accuracy: 98.05% Time: 164.19s
+Epoch 14/150 Train Accuracy: 98.41% Test Accuracy: 97.94% Time: 163.78s
+Epoch 15/150 Train Accuracy: 99.04% Test Accuracy: 98.83% Time: 163.67s
+Epoch 16/150 Train Accuracy: 99.39% Test Accuracy: 99.26% Time: 163.27s
+Epoch 17/150 Train Accuracy: 99.23% Test Accuracy: 98.97% Time: 163.06s
+Epoch 18/150 Train Accuracy: 99.43% Test Accuracy: 99.30% Time: 162.77s
+Epoch 19/150 Train Accuracy: 99.80% Test Accuracy: 99.78% Time: 162.53s
+Epoch 20/150 Train Accuracy: 99.54% Test Accuracy: 99.50% Time: 162.23s
+Epoch 21/150 Train Accuracy: 99.39% Test Accuracy: 99.25% Time: 161.98s
+Epoch 22/150 Train Accuracy: 99.84% Test Accuracy: 99.81% Time: 161.84s
+Epoch 23/150 Train Accuracy: 99.96% Test Accuracy: 99.98% Time: 161.50s
+Epoch 24/150 Train Accuracy: 99.55% Test Accuracy: 99.57% Time: 161.48s
+Epoch 25/150 Train Accuracy: 100.00% Test Accuracy: 99.99% Time: 161.16s
+Epoch 26/150 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 160.91s
+coder@coder-sanderw-alt-mulig-machine-68cd79f758-pgrrq:~/teklit-maskin/src$ 

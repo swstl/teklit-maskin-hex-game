@@ -1,0 +1,37 @@
+> ssh main.alt-mulig-machine.sanderw.coder
+coder@coder-sanderw-alt-mulig-machine-7c695b5dff-7z596:~$ cd teklit-maskin/
+coder@coder-sanderw-alt-mulig-machine-7c695b5dff-7z596:~/teklit-maskin$ cat output.log 
+Initialization of sparse structure.
+Arguments:
+  number_of_boards: 100000
+  board_size: 11
+  epochs: 350
+  number_of_clauses: 15000
+  T: 6000
+  s: 2.0
+  number_of_state_bits: 8
+  depth: 2
+  hypervector_size: 256
+  hypervector_bits: 4
+  message_size: 72
+  message_bits: 4
+  double_hashing: False
+  one_hot_encoding: False
+  max_included_literals: 250
+No cache found, loading CSV: data/hex_games_100000_size_11.csv
+Generating 100000 games on 11x11 board...
+Done! Generated 100000 games. Output: hex_games_100000_size_11.csv
+No cache found, loading CSV: data/hex_games_100000_size_11.csv
+Saving to cache: data/hex_games_100000_size_11_cached.npz
+Loaded 100000 games from data/hex_games_100000_size_11.csv
+No cache found, creating graphs...
+Creating graphs on dataset of length training: 80000, and test: 20000...
+Saving graphs to cache/graphs_11x11_100000_2fbf91fe.pkl...
+Graphs saved!
+Training for 350 epochs...
+Epoch 1/350 Train Accuracy: 66.60% Test Accuracy: 66.59% Time: 84.36s
+Epoch 2/350 Train Accuracy: 86.40% Test Accuracy: 86.29% Time: 75.38s
+Epoch 3/350 Train Accuracy: 97.70% Test Accuracy: 97.52% Time: 73.66s
+Epoch 4/350 Train Accuracy: 99.89% Test Accuracy: 99.90% Time: 73.08s
+Epoch 5/350 Train Accuracy: 99.98% Test Accuracy: 100.00% Time: 72.64s
+Epoch 6/350 Train Accuracy: 100.00% Test Accuracy: 100.00% Time: 71.37s

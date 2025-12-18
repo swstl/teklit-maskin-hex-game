@@ -12,12 +12,12 @@ import os
 
 def default_args(**kwargs):
     parser = argparse.ArgumentParser()
-    parser.add_argument("--moves-before-win", "-m", default=0, type=int)
+    parser.add_argument("--moves-before-win", "-m", default=5, type=int)
     parser.add_argument("--number-of-boards", "-n", default=100000, type=int)
-    parser.add_argument("--board-size", "-b", default=21, type=int)
+    parser.add_argument("--board-size", "-b", default=19, type=int)
     parser.add_argument("--epochs", default=150, type=int)
     parser.add_argument("--number-of-clauses", default=32000, type=int)
-    parser.add_argument("--T", default=6000, type=int) # try increasing to 7000
+    parser.add_argument("--T", default=6000, type=int)
     parser.add_argument("--s", default=1.5, type=float)
     parser.add_argument("--number-of-state-bits", default=8, type=int)
     parser.add_argument("--depth", default=2, type=int)
@@ -147,45 +147,7 @@ def train_tm(tm, graph_train, Y_train, graph_test, Y_test, args):
 
 
 ###################################################
-################ Print the clauses ################
-###################################################
-def print_clauses(tm, symbols, hypervector_size):
-    """
-    Print clauses with actual symbol names instead of feature indices
-
-    Args:
-        tm: The trained Tsetlin Machine
-        symbols: List of symbol names
-        hypervector_size: Size of the hypervector
-    """
-    weights = tm.get_state()[1].reshape(2, -1)
-
-    print(f"\nSymbols: {symbols}")
-    print(f"Number of symbols: {len(symbols)}")
-    print(f"Hypervector size: {hypervector_size}\n")
-
-    for i in range(min(10, tm.number_of_clauses)):  # Print first 10 clauses
-        print("Clause #%d Weights:(%d %d)" % (i, weights[0,i], weights[1,i]), end=' ')
-        l = []
-
-        for k in range(hypervector_size * 2):
-            if tm.ta_action(0, i, k):
-                if k < hypervector_size:
-                    # Positive literal
-                    l.append(f"x{k}")
-                else:
-                    # Negated literal
-                    l.append(f"NOT x{k - hypervector_size}")
-
-        if l:
-            print(" AND ".join(l))
-        else:
-            print("(empty clause)")
-
-
-
-###################################################
-################ Print the clauses ################
+################  Actual  running  ################
 ###################################################
 # 1. get dataset : get_hex_games
 # 2. Create the graphs : create_graphs
@@ -213,4 +175,3 @@ x_train, y_train, x_test, y_test = get_hex_games(0.8, args)
 # train_graph, test_graph, symbols = get_or_create_graphs(x_train, x_test, args, create_graphs)
 train_graph, test_graph, symbols = create_graphs(x_train, x_test, args)
 train_tm(tm, train_graph, y_train, test_graph, y_test, args)
-print_clauses(tm, symbols, args.hypervector_size)
