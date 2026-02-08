@@ -1,0 +1,61 @@
+Message size is apperently very important
+
+coder@coder-sanderw-alt-mulig-machine-85cb4bfc95-znnsp:~/teklit-maskin$ uv run src/swstl.py Initialization of sparse structure. Arguments: number_of_boards: 50000 board_size: 6 epochs: 100 number_of_clauses: 5000
+  T: 5000
+  s: 1.0
+  number_of_state_bits: 8
+  depth: 2
+  hypervector_size: 256
+  hypervector_bits: 4
+  message_size: 256
+  message_bits: 4
+  double_hashing: False
+  one_hot_encoding: False
+  max_included_literals: 10000
+Loaded 50000 games from data/hex_games_50000_size_6.csv
+Creating graphs on dataset of length training: 40000, and test: 10000...
+Training for 100 epochs...
+Epoch 1/100 Train Accuracy: 70.80% Test Accuracy: 70.48% Time: 20.66s
+Epoch 2/100 Train Accuracy: 67.13% Test Accuracy: 66.98% Time: 16.10s
+Epoch 3/100 Train Accuracy: 71.27% Test Accuracy: 70.62% Time: 15.95s
+Epoch 4/100 Train Accuracy: 69.63% Test Accuracy: 68.95% Time: 15.91s
+Epoch 5/100 Train Accuracy: 69.18% Test Accuracy: 68.90% Time: 16.14s
+Epoch 6/100 Train Accuracy: 72.47% Test Accuracy: 72.26% Time: 16.13s
+Epoch 7/100 Train Accuracy: 71.67% Test Accuracy: 70.82% Time: 16.17s
+Epoch 8/100 Train Accuracy: 72.26% Test Accuracy: 72.10% Time: 16.04s
+Epoch 9/100 Train Accuracy: 72.69% Test Accuracy: 72.19% Time: 15.94s
+Epoch 10/100 Train Accuracy: 72.96% Test Accuracy: 72.69% Time: 15.91s
+^CTraceback (most recent call last):
+  File "/home/coder/teklit-maskin/src/swstl.py", line 296, in <module>
+    ###################################################
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/coder/teklit-maskin/src/swstl.py", line 233, in train_tm
+    tm.fit(graph_train, Y_train, epochs=1, incremental=True)
+  File "/home/coder/teklit-maskin/.venv/lib/python3.12/site-packages/GraphTsetlinMachine/tm.py", line 950, in fit
+    self._fit(graphs, encoded_Y, epochs=epochs, incremental=incremental)
+  File "/home/coder/teklit-maskin/.venv/lib/python3.12/site-packages/GraphTsetlinMachine/tm.py", line 728, in _fit
+    cuda.Context.synchronize()
+KeyboardInterrupt
+coder@coder-sanderw-alt-mulig-machine-85cb4bfc95-znnsp:~/teklit-maskin$ uv run src/swstl.py
+Initialization of sparse structure.
+Arguments:
+  number_of_boards: 50000
+  board_size: 6
+  epochs: 100
+  number_of_clauses: 5000
+  T: 5000
+  s: 1.0
+  number_of_state_bits: 8
+  depth: 2
+  hypervector_size: 256
+  hypervector_bits: 4
+  message_size: 32
+  message_bits: 4
+  double_hashing: False
+  one_hot_encoding: False
+  max_included_literals: 10000
+Loaded 50000 games from data/hex_games_50000_size_6.csv
+Creating graphs on dataset of length training: 40000, and test: 10000...
+Training for 100 epochs...
+Epoch 1/100 Train Accuracy: 82.64% Test Accuracy: 82.48% Time: 13.90s
+Epoch 2/100 Train Accuracy: 85.44% Test Accuracy: 85.23% Time: 12.39s

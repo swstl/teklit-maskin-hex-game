@@ -1,0 +1,184 @@
+coder@coder-sanderw-alt-mulig-machine-8ccccf77c-tjfr4:~$ ls
+ikt466-project	teklit-maskin  zsh
+coder@coder-sanderw-alt-mulig-machine-8ccccf77c-tjfr4:~$ cd teklit-maskin/
+coder@coder-sanderw-alt-mulig-machine-8ccccf77c-tjfr4:~/teklit-maskin$ cat src/main.py.log 
+Initialization of sparse structure.
+Arguments:
+  moves_before_win: 0
+  number_of_boards: 100000
+  board_size: 21
+  epochs: 150
+  number_of_clauses: 32000
+  T: 6000
+  s: 1.5
+  number_of_state_bits: 8
+  depth: 2
+  hypervector_size: 256
+  hypervector_bits: 4
+  message_size: 82
+  message_bits: 4
+  double_hashing: False
+  one_hot_encoding: False
+  max_included_literals: 250
+No cache found, loading CSV: data/hex_games_100000_size_21.csv
+Generating 100000 games on 21x21 board (stopping 0 moves early)...
+Done! Generated 100000 games. Output: hex_games_100000_size_21.csv
+No cache found, loading CSV: data/hex_games_100000_size_21.csv
+Saving to cache: data/hex_games_100000_size_21_cached.npz
+Loaded 100000 games from hex_games_100000_size_21.csv
+Creating graphs on dataset of length training: 80000, and test: 20000...
+Training for 150 epochs...
+Epoch 1/150 Train Accuracy: 55.40% Test Accuracy: 54.73% Time: 562.58s
+Epoch 2/150 Train Accuracy: 56.81% Test Accuracy: 55.73% Time: 532.36s
+Epoch 3/150 Train Accuracy: 58.80% Test Accuracy: 57.44% Time: 531.97s
+Epoch 4/150 Train Accuracy: 59.82% Test Accuracy: 58.51% Time: 531.86s
+Epoch 5/150 Train Accuracy: 60.41% Test Accuracy: 59.30% Time: 531.25s
+Epoch 6/150 Train Accuracy: 62.62% Test Accuracy: 61.22% Time: 531.59s
+Epoch 7/150 Train Accuracy: 63.53% Test Accuracy: 62.34% Time: 531.16s
+Epoch 8/150 Train Accuracy: 62.01% Test Accuracy: 61.05% Time: 531.67s
+Epoch 9/150 Train Accuracy: 65.16% Test Accuracy: 63.74% Time: 530.56s
+Epoch 10/150 Train Accuracy: 64.31% Test Accuracy: 62.90% Time: 530.72s
+Epoch 11/150 Train Accuracy: 62.40% Test Accuracy: 61.43% Time: 530.20s
+Epoch 12/150 Train Accuracy: 63.55% Test Accuracy: 62.52% Time: 530.62s
+Epoch 13/150 Train Accuracy: 63.85% Test Accuracy: 62.54% Time: 530.72s
+Epoch 14/150 Train Accuracy: 62.19% Test Accuracy: 61.12% Time: 531.46s
+Epoch 15/150 Train Accuracy: 67.88% Test Accuracy: 66.70% Time: 531.11s
+Epoch 16/150 Train Accuracy: 68.70% Test Accuracy: 67.40% Time: 530.48s
+Epoch 17/150 Train Accuracy: 66.50% Test Accuracy: 65.39% Time: 530.36s
+Epoch 18/150 Train Accuracy: 68.89% Test Accuracy: 67.25% Time: 529.63s
+Epoch 19/150 Train Accuracy: 70.77% Test Accuracy: 69.12% Time: 529.51s
+Epoch 20/150 Train Accuracy: 74.43% Test Accuracy: 72.80% Time: 529.66s
+Epoch 21/150 Train Accuracy: 75.75% Test Accuracy: 74.67% Time: 528.47s
+Epoch 22/150 Train Accuracy: 76.10% Test Accuracy: 74.44% Time: 529.11s
+Epoch 23/150 Train Accuracy: 74.70% Test Accuracy: 73.50% Time: 528.37s
+Epoch 24/150 Train Accuracy: 70.09% Test Accuracy: 68.97% Time: 528.74s
+Epoch 25/150 Train Accuracy: 74.16% Test Accuracy: 72.90% Time: 528.21s
+Epoch 26/150 Train Accuracy: 72.75% Test Accuracy: 71.20% Time: 527.65s
+Epoch 27/150 Train Accuracy: 73.18% Test Accuracy: 71.66% Time: 528.33s
+Epoch 28/150 Train Accuracy: 69.05% Test Accuracy: 67.99% Time: 527.34s
+Epoch 29/150 Train Accuracy: 78.29% Test Accuracy: 76.82% Time: 527.55s
+Epoch 30/150 Train Accuracy: 77.98% Test Accuracy: 76.41% Time: 528.34s
+Epoch 31/150 Train Accuracy: 75.42% Test Accuracy: 74.33% Time: 527.03s
+Epoch 32/150 Train Accuracy: 68.29% Test Accuracy: 67.38% Time: 528.59s
+Epoch 33/150 Train Accuracy: 82.02% Test Accuracy: 80.57% Time: 526.27s
+Epoch 34/150 Train Accuracy: 80.34% Test Accuracy: 78.94% Time: 526.28s
+Epoch 35/150 Train Accuracy: 71.61% Test Accuracy: 70.74% Time: 526.74s
+Epoch 36/150 Train Accuracy: 84.40% Test Accuracy: 83.21% Time: 525.94s
+Epoch 37/150 Train Accuracy: 78.06% Test Accuracy: 77.19% Time: 526.04s
+Epoch 38/150 Train Accuracy: 70.75% Test Accuracy: 69.79% Time: 525.65s
+Epoch 39/150 Train Accuracy: 78.58% Test Accuracy: 77.46% Time: 526.23s
+Epoch 40/150 Train Accuracy: 83.57% Test Accuracy: 82.49% Time: 529.25s
+Epoch 41/150 Train Accuracy: 86.55% Test Accuracy: 85.25% Time: 525.20s
+Epoch 42/150 Train Accuracy: 87.13% Test Accuracy: 85.60% Time: 526.20s
+Epoch 43/150 Train Accuracy: 87.99% Test Accuracy: 86.88% Time: 525.37s
+Epoch 44/150 Train Accuracy: 89.13% Test Accuracy: 88.44% Time: 524.63s
+Epoch 45/150 Train Accuracy: 81.92% Test Accuracy: 81.07% Time: 525.60s
+Epoch 46/150 Train Accuracy: 84.27% Test Accuracy: 83.45% Time: 524.12s
+Epoch 47/150 Train Accuracy: 83.23% Test Accuracy: 81.92% Time: 524.56s
+Epoch 48/150 Train Accuracy: 78.61% Test Accuracy: 77.50% Time: 525.17s
+Epoch 49/150 Train Accuracy: 82.04% Test Accuracy: 80.75% Time: 525.03s
+Epoch 50/150 Train Accuracy: 81.56% Test Accuracy: 80.20% Time: 525.97s
+Epoch 51/150 Train Accuracy: 58.81% Test Accuracy: 58.41% Time: 524.31s
+Epoch 52/150 Train Accuracy: 83.45% Test Accuracy: 82.27% Time: 524.82s
+Epoch 53/150 Train Accuracy: 84.94% Test Accuracy: 84.06% Time: 525.22s
+Epoch 54/150 Train Accuracy: 89.52% Test Accuracy: 88.63% Time: 524.16s
+Epoch 55/150 Train Accuracy: 88.53% Test Accuracy: 87.19% Time: 524.82s
+Epoch 56/150 Train Accuracy: 84.75% Test Accuracy: 83.67% Time: 524.48s
+Epoch 57/150 Train Accuracy: 79.12% Test Accuracy: 78.25% Time: 523.67s
+Epoch 58/150 Train Accuracy: 85.45% Test Accuracy: 84.72% Time: 524.25s
+Epoch 59/150 Train Accuracy: 90.80% Test Accuracy: 89.85% Time: 522.10s
+Epoch 60/150 Train Accuracy: 86.18% Test Accuracy: 85.59% Time: 523.66s
+Epoch 61/150 Train Accuracy: 91.73% Test Accuracy: 91.06% Time: 523.03s
+Epoch 62/150 Train Accuracy: 92.18% Test Accuracy: 91.14% Time: 523.18s
+Epoch 63/150 Train Accuracy: 86.03% Test Accuracy: 84.97% Time: 523.33s
+Epoch 64/150 Train Accuracy: 87.10% Test Accuracy: 86.45% Time: 522.88s
+Epoch 65/150 Train Accuracy: 95.90% Test Accuracy: 95.31% Time: 522.40s
+Epoch 66/150 Train Accuracy: 84.31% Test Accuracy: 83.62% Time: 522.95s
+Epoch 67/150 Train Accuracy: 92.89% Test Accuracy: 91.92% Time: 522.32s
+Epoch 68/150 Train Accuracy: 92.17% Test Accuracy: 91.67% Time: 523.19s
+Epoch 69/150 Train Accuracy: 93.40% Test Accuracy: 93.05% Time: 522.98s
+Epoch 70/150 Train Accuracy: 89.15% Test Accuracy: 88.62% Time: 522.33s
+Epoch 71/150 Train Accuracy: 89.65% Test Accuracy: 89.18% Time: 522.87s
+Epoch 72/150 Train Accuracy: 93.03% Test Accuracy: 92.36% Time: 522.46s
+Epoch 73/150 Train Accuracy: 96.41% Test Accuracy: 96.00% Time: 523.09s
+Epoch 74/150 Train Accuracy: 96.95% Test Accuracy: 96.21% Time: 522.34s
+Epoch 75/150 Train Accuracy: 96.59% Test Accuracy: 95.93% Time: 521.67s
+Epoch 76/150 Train Accuracy: 94.14% Test Accuracy: 93.38% Time: 522.10s
+Epoch 77/150 Train Accuracy: 97.46% Test Accuracy: 96.86% Time: 521.11s
+Epoch 78/150 Train Accuracy: 91.33% Test Accuracy: 90.27% Time: 521.47s
+Epoch 79/150 Train Accuracy: 94.69% Test Accuracy: 94.16% Time: 520.82s
+Epoch 80/150 Train Accuracy: 98.40% Test Accuracy: 97.97% Time: 520.72s
+Epoch 81/150 Train Accuracy: 98.64% Test Accuracy: 98.23% Time: 520.78s
+Epoch 82/150 Train Accuracy: 97.76% Test Accuracy: 97.38% Time: 519.75s
+Epoch 83/150 Train Accuracy: 96.14% Test Accuracy: 95.56% Time: 520.73s
+Epoch 84/150 Train Accuracy: 85.71% Test Accuracy: 84.60% Time: 520.18s
+Epoch 85/150 Train Accuracy: 97.83% Test Accuracy: 97.41% Time: 520.58s
+Epoch 86/150 Train Accuracy: 98.17% Test Accuracy: 97.58% Time: 521.00s
+Epoch 87/150 Train Accuracy: 98.88% Test Accuracy: 98.45% Time: 520.95s
+Epoch 88/150 Train Accuracy: 98.32% Test Accuracy: 97.91% Time: 520.57s
+Epoch 89/150 Train Accuracy: 98.89% Test Accuracy: 98.59% Time: 520.28s
+Epoch 90/150 Train Accuracy: 98.89% Test Accuracy: 98.56% Time: 519.94s
+Epoch 91/150 Train Accuracy: 98.08% Test Accuracy: 97.59% Time: 520.50s
+Epoch 92/150 Train Accuracy: 98.90% Test Accuracy: 98.50% Time: 519.63s
+Epoch 93/150 Train Accuracy: 98.94% Test Accuracy: 98.58% Time: 520.14s
+Epoch 94/150 Train Accuracy: 98.10% Test Accuracy: 97.58% Time: 520.00s
+Epoch 95/150 Train Accuracy: 95.29% Test Accuracy: 94.38% Time: 520.06s
+Epoch 96/150 Train Accuracy: 97.36% Test Accuracy: 97.11% Time: 521.46s
+Epoch 97/150 Train Accuracy: 99.56% Test Accuracy: 99.32% Time: 519.62s
+Epoch 98/150 Train Accuracy: 96.91% Test Accuracy: 96.52% Time: 520.34s
+Epoch 99/150 Train Accuracy: 82.45% Test Accuracy: 81.77% Time: 520.04s
+Epoch 100/150 Train Accuracy: 97.40% Test Accuracy: 96.92% Time: 519.70s
+Epoch 101/150 Train Accuracy: 96.43% Test Accuracy: 95.86% Time: 521.01s
+Epoch 102/150 Train Accuracy: 96.94% Test Accuracy: 96.56% Time: 520.13s
+Epoch 103/150 Train Accuracy: 95.72% Test Accuracy: 95.37% Time: 520.12s
+Epoch 104/150 Train Accuracy: 98.34% Test Accuracy: 97.89% Time: 520.38s
+Epoch 105/150 Train Accuracy: 97.86% Test Accuracy: 97.52% Time: 519.63s
+Epoch 106/150 Train Accuracy: 94.58% Test Accuracy: 93.97% Time: 520.36s
+Epoch 107/150 Train Accuracy: 96.64% Test Accuracy: 96.12% Time: 519.35s
+Epoch 108/150 Train Accuracy: 98.03% Test Accuracy: 97.81% Time: 520.06s
+Epoch 109/150 Train Accuracy: 98.43% Test Accuracy: 98.05% Time: 520.04s
+Epoch 110/150 Train Accuracy: 98.42% Test Accuracy: 97.97% Time: 519.05s
+Epoch 111/150 Train Accuracy: 97.68% Test Accuracy: 97.28% Time: 519.72s
+Epoch 112/150 Train Accuracy: 98.47% Test Accuracy: 98.06% Time: 518.98s
+Epoch 113/150 Train Accuracy: 99.23% Test Accuracy: 99.01% Time: 519.21s
+Epoch 114/150 Train Accuracy: 97.28% Test Accuracy: 96.65% Time: 520.42s
+Epoch 115/150 Train Accuracy: 97.00% Test Accuracy: 96.41% Time: 519.68s
+Epoch 116/150 Train Accuracy: 90.05% Test Accuracy: 89.37% Time: 520.70s
+Epoch 117/150 Train Accuracy: 91.34% Test Accuracy: 90.59% Time: 520.03s
+Epoch 118/150 Train Accuracy: 96.92% Test Accuracy: 96.53% Time: 520.42s
+Epoch 119/150 Train Accuracy: 97.16% Test Accuracy: 97.13% Time: 520.55s
+Epoch 120/150 Train Accuracy: 97.73% Test Accuracy: 97.57% Time: 519.22s
+Epoch 121/150 Train Accuracy: 97.59% Test Accuracy: 97.21% Time: 519.28s
+Epoch 122/150 Train Accuracy: 94.23% Test Accuracy: 93.39% Time: 518.90s
+Epoch 123/150 Train Accuracy: 90.62% Test Accuracy: 89.64% Time: 520.24s
+Epoch 124/150 Train Accuracy: 94.03% Test Accuracy: 93.38% Time: 521.15s
+Epoch 125/150 Train Accuracy: 95.46% Test Accuracy: 94.74% Time: 520.32s
+Epoch 126/150 Train Accuracy: 96.36% Test Accuracy: 95.70% Time: 520.12s
+Epoch 127/150 Train Accuracy: 98.97% Test Accuracy: 98.59% Time: 519.62s
+Epoch 128/150 Train Accuracy: 98.37% Test Accuracy: 98.04% Time: 519.24s
+Epoch 129/150 Train Accuracy: 99.07% Test Accuracy: 98.61% Time: 518.99s
+Epoch 130/150 Train Accuracy: 99.20% Test Accuracy: 99.05% Time: 518.63s
+Epoch 131/150 Train Accuracy: 98.60% Test Accuracy: 98.25% Time: 518.22s
+Epoch 132/150 Train Accuracy: 99.11% Test Accuracy: 98.85% Time: 518.88s
+Epoch 133/150 Train Accuracy: 98.09% Test Accuracy: 97.88% Time: 518.57s
+Epoch 134/150 Train Accuracy: 98.58% Test Accuracy: 98.17% Time: 518.59s
+Epoch 135/150 Train Accuracy: 97.87% Test Accuracy: 97.45% Time: 518.33s
+Epoch 136/150 Train Accuracy: 98.63% Test Accuracy: 98.30% Time: 518.74s
+Epoch 137/150 Train Accuracy: 97.85% Test Accuracy: 97.50% Time: 519.06s
+Epoch 138/150 Train Accuracy: 94.77% Test Accuracy: 94.53% Time: 518.30s
+Epoch 139/150 Train Accuracy: 98.72% Test Accuracy: 98.30% Time: 518.86s
+Epoch 140/150 Train Accuracy: 98.38% Test Accuracy: 97.97% Time: 519.19s
+Epoch 141/150 Train Accuracy: 95.07% Test Accuracy: 94.48% Time: 519.44s
+Epoch 142/150 Train Accuracy: 95.27% Test Accuracy: 94.76% Time: 519.95s
+Epoch 143/150 Train Accuracy: 98.11% Test Accuracy: 97.69% Time: 518.87s
+Epoch 144/150 Train Accuracy: 98.27% Test Accuracy: 97.97% Time: 519.75s
+Epoch 145/150 Train Accuracy: 98.30% Test Accuracy: 97.88% Time: 518.48s
+Epoch 146/150 Train Accuracy: 98.30% Test Accuracy: 97.97% Time: 518.15s
+Epoch 147/150 Train Accuracy: 98.15% Test Accuracy: 97.48% Time: 518.57s
+Epoch 148/150 Train Accuracy: 95.30% Test Accuracy: 94.70% Time: 517.66s
+Epoch 149/150 Train Accuracy: 98.86% Test Accuracy: 98.58% Time: 518.12s
+Epoch 150/150 Train Accuracy: 99.05% Test Accuracy: 98.77% Time: 517.89s
+
+Symbols: ['empty', 'red', 'blue', 'row_0', 'col_0', 'row_1', 'col_1', 'row_2', 'col_2', 'row_3', 'col_3', 'row_4', 'col_4', 'row_5', 'col_5', 'row_6', 'col_6', 'row_7', 'col_7', 'row_8', 'col_8', 'row_9', 'col_9', 'row_10', 'col_10', 'row_11', 'col_11', 'row_12', 'col_12', 'row_13', 'col_13', 'row_14', 'col_14', 'row_15', 'col_15', 'row_16', 'col_16', 'row_17', 'col_17', 'row_18', 'col_18', 'row_19', 'col_19', 'row_20', 'col_20', 'top', 'bottom', 'left', 'right']
+Number of symbols: 49
+Hypervector size: 256
